@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -141,6 +142,20 @@ public class PracticeActivity extends Activity {
 			}
 		}
 	};
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+			mChatService.write(BluetoothChatService.VOL_UP);
+			return true;
+		}
+		else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
+			mChatService.write(BluetoothChatService.VOL_DOWN);
+			return true;
+		}
+			
+		return super.onKeyDown(keyCode, event);
+	}
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(Debug) Log.d(TAG, "onActivityResult " + resultCode);
